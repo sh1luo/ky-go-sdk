@@ -180,7 +180,7 @@ func (k *Api快验_类) D登录_通用(响应信息 *string, 账号或卡号, �
 	}
 
 	// {"Data":{"Key":"677F23CB3FA0055B5FD03916D6AB3C9A","OutUser":1,"VipTime":1685941943},"Time":1683379761,"Status":36354,"Note":""}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 
 	return true
 
@@ -211,7 +211,7 @@ func (k *Api快验_类) Y用户减少余额(响应信息 *string, 减少数值 f
 	}
 
 	//  {"Data":{"Money":"9.93"},"Time":1683379761,"Status":36354,"Note":""}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 
 	return true
 
@@ -236,7 +236,7 @@ func (k *Api快验_类) Y用户减少积分(响应信息 *string, 减少数值 f
 	}
 
 	// {"Data":{"VipNumber":"9.93"},"Time":1683379761,"Status":36354,"Note":""}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 
 	return true
 
@@ -260,7 +260,7 @@ func (k *Api快验_类) Y用户减少点数(响应信息 *string, 减少数值 i
 	}
 
 	// {"Data":{"VipTime":"9"},"Time":1683379761,"Status":36354,"Note":""}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -308,7 +308,7 @@ func (k *Api快验_类) Q取Vip数据(响应信息 *string) bool {
 	//' {"Time":1683379761,"Status":203,"Note":"Vip已到期"}
 	//' {"Time":1683379761,"Status":208,"Note":"Vip数据非标准Json"}
 	//' {"Data":{"VipData":"这里的数据,只有登录成功并且账号会员不过期才会传输出去的数据","VipData2":"这里的数据,只有登录成功并且账号会员不过期才会传输出去的数据"},"Time":1683463084,"Status":16986,"Note":""}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return *响应信息 != ""
 }
 
@@ -326,7 +326,7 @@ func (k *Api快验_类) Q取应用公告(响应信息 *string) string {
 	}
 
 	if 响应信息 != nil {
-		*响应信息 = 响应json.GetObject("Data").String()
+		*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	}
 	return string(响应json.GetStringBytes("Data", "AppGongGao"))
 }
@@ -351,7 +351,7 @@ func (k *Api快验_类) Q取应用专属变量(响应信息 *string, 变量名�
 	' {"Time":1683473536,"Status":209,"Note":"未登录,请先操作登录"}
 	*/
 	if 响应信息 != nil {
-		*响应信息 = 响应json.GetObject("Data").String()
+		*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	}
 
 	return true
@@ -371,7 +371,7 @@ func (k *Api快验_类) Q取公共变量(响应信息 *string, 变量名称 stri
 	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
 		return false
 	}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -395,7 +395,7 @@ func (k *Api快验_类) Q取最新版本检测(响应信息 *string, 当前版�
 		return false
 	}
 	//' {"Data":{"IsUpdate":true,"NewVersion":"1.2.5","Version":1.2},"Time":1683542365,"Status":28677,"Note":""}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	*是否需要更新 = 响应json.GetBool("Data", "IsUpdate")
 	*最新版本号文本 = string(响应json.GetStringBytes("Data", "NewVersion"))
 	return true
@@ -456,7 +456,7 @@ func (k *Api快验_类) Z置新绑定信息(响应信息 *string, 新绑定信�
 	//' {"Data":{"ReduceVipTime":10},"Time":1683601988,"Status":34623,"Note":""}
 	//' {"Time":1683596452,"Status":210,"Note":"未登录,请先操作登录"}
 	//' {"Time":1683595169,"Status":205,"Note":"新绑定信息不能为空."}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -493,7 +493,7 @@ func (k *Api快验_类) Q取验证码(响应信息 *string, 类型 int) bool {
 		return false
 	}
 
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 
 	return true
 }
@@ -515,7 +515,7 @@ func (k *Api快验_类) Q取短信验证码(响应信息 *string, 手机号, 用
 		return false
 	}
 
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -571,7 +571,7 @@ func (k *Api快验_类) Q取软件用户信息(响应信息 *string) bool {
 		return false
 	}
 	//' {"Id":1,"Key":"aaaaaa","MaxOnline":1,"LoginIp":"127.0.0.1","RegisterTime":1683349292,"LoginTime": 1683349292,"Status":1,"Uid":21,"User":"aaaaaa","UserClassId":22,"UserClassMark":2,"UserClassName":"Vip2","UserClassWeight":2,"VipNumber":115.78,"VipTime":1715438220}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -588,7 +588,7 @@ func (k *Api快验_类) Q取用户基础信息(响应信息 *string) bool {
 		return false
 	}
 	//' {"Email":"1056795985@qq.com","Phone":"15666666666","Qq":"1056795985"}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -753,7 +753,7 @@ func (k *Api快验_类) X心跳(响应信息 *string, 响应当前状态 *int) b
 	// {"Time":1683601988,"Status":34623,"Note":""}
 	// {"Time":1683596452,"Status":210,"Note":"未登录,请先操作登录"}
 	// {"Data":{"Status":1},"Time":1684038983,"Status":35387,"Note":""}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	*响应当前状态 = 响应json.GetInt("Data", "Status")
 	return true
 }
@@ -777,7 +777,7 @@ func (k *Api快验_类) M密码找回或修改_超级密码(响应信息 *string
 	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
 		return false
 	}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -925,7 +925,7 @@ func (k *Api快验_类) D订单_取状态(响应信息 *string, 订单id string)
 	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
 		return false
 	}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -949,7 +949,7 @@ func (k *Api快验_类) Y余额充值_支付宝PC支付(响应信息 *string, �
 	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
 		return false
 	}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	*订单id = string(响应json.GetStringBytes("Data", "OrderId"))
 	*支付Url = string(响应json.GetStringBytes("Data", "PayURL"))
 	return true
@@ -975,7 +975,7 @@ func (k *Api快验_类) D订单_购买余额(响应信息 *string, 支付通道,
 	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
 		return false
 	}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	*订单id = string(响应json.GetStringBytes("Data", "OrderId"))
 	return true
 }
@@ -1000,7 +1000,7 @@ func (k *Api快验_类) Y余额充值_微信支付支付(响应信息 *string, �
 		return false
 	}
 
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	// {"OrderId":"202305162202080001","WxPayURL":"weixin://wxpay/bizpayurl?pr=QDKS4KWzz"}
 	*订单id = string(响应json.GetStringBytes("Data", "OrderId"))
 	*支付二维码 = string(响应json.GetStringBytes("Data", "WxPayURL"))
@@ -1019,7 +1019,7 @@ func (k *Api快验_类) Q余额充值_取支付通道状态(响应信息 *string
 	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
 		return false
 	}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -1043,7 +1043,7 @@ func (k *Api快验_类) Q取已购买卡号列表(响应信息 *string, 最近�
 	}
 
 	// [{"Id":331,"KaClassId":18,"Money":3,"Name":"1GRAGpGtuotDYhwZCecqR8FHH","Num":0,"NumMax":1,"Status":1},{"Id":332,"KaClassId":18,"Money":3,"Name":"1KBzZF7YXtzHf6pDE9Qv6ecCZ","Num":0,"NumMax":1,"Status":1}]
-	*响应信息 = 响应json.String()
+	*响应信息 = string(响应json.MarshalTo(nil))
 	return true
 }
 
@@ -1060,7 +1060,7 @@ func (k *Api快验_类) Q取可购买卡类列表(响应信息 *string) bool {
 		return false
 	}
 	//{"Data":[{"Id":27,"Money":5,"Name":"开发会员月卡"},{"Id":28,"Money":50,"Name":"商业会员月卡"}],"Time":1685791345,"Status":74080,"Note":""}
-	*响应信息 = 响应json.String()
+	*响应信息 = string(响应json.MarshalTo(nil))
 	return true
 }
 
@@ -1078,7 +1078,7 @@ func (k *Api快验_类) Y余额购买充值卡(响应信息 *string, 卡类id in
 	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
 		return false
 	}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -1096,7 +1096,7 @@ func (k *Api快验_类) Y余额购买积分(响应信息 *string, 花费余额 f
 	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
 		return false
 	}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -1112,7 +1112,7 @@ func (k *Api快验_类) Q取用户类型列表(响应信息 *string) bool {
 	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
 		return false
 	}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -1131,7 +1131,7 @@ func (k *Api快验_类) Z置用户类型(响应信息 *string, 新用户类型�
 		return false
 	}
 	//' {"UserClassMark":2,"UserClassName":"Vip2","VipTime":1699911226}
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -1157,7 +1157,7 @@ func (k *Api快验_类) Y云函数运行(响应信息 *string, 函数名, JSON�
 	// {"Data":{"Return":21,"Time":2},"Time":1684506704,"Status":29964,"Note":""}
 	// {"Data":{"Return":{"Key":"aaaaaa","Status":1,"Tab":"AMD Ryzen 7 6800H with Radeon Graphics         |178BFBFF00A40F41","Uid":21,"User":"aaaaaa"},"Time":1},"Time":1684506816,"Status":30949,"Note":""}
 
-	*响应信息 = 响应json.GetObject("Data").String()
+	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -1197,7 +1197,7 @@ func (k *Api快验_类) R任务池_任务查询(响应任务信息 *string, Uuid
 		return false
 	}
 	//' {"Data":{"ReturnData":"","Status":1,"TimeEnd":0,"TimeStart":1684762832},"Time":1684762832,"Status":28692,"Note":""}
-	*响应任务信息 = 响应json.GetObject("Data").String()
+	*响应任务信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
@@ -1218,7 +1218,7 @@ func (k *Api快验_类) R任务池_任务处理获取(响应任务信息 *string
 		return false
 	}
 	//' [{"uuid":"63943989-893a-431a-b0fa-2cfb240cb782","Tid":1,"TimeStart":1684766914,"SubmitData":"{\"a\":1}"},{"uuid":"8087b68b-3657-4397-9dea-599a10584b28","Tid":1,"TimeStart":1684764215,"SubmitData":"{\"a\":1}"},{"uuid":"8c6d6954-00b5-40df-bf8c-ec65b995e9ea","Tid":1,"TimeStart":1684767755,"SubmitData":"{\"a\":1}"}]
-	*响应任务信息 = 响应json.GetObject("Data").String()
+	*响应任务信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	return true
 }
 
