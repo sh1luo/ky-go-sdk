@@ -757,20 +757,20 @@ func (k *Api快验_类) Y用户登录注销_远程(用户名或卡号, 密码 st
 .参数 响应信息, 文本型, 参考 可空, 仅供参考
 .参数 响应当前状态, 整数型, 参考 可空, 当前状态 正常返回1  会员已到期返回3(免费模式即使到期了也不会返回3)
 */
-func (k *Api快验_类) X心跳(响应信息 *string, 响应当前状态 *int) bool {
+func (k *Api快验_类) X心跳(响应信息 *string, 响应当前状态 *int) (string, bool) {
 	请求json := make(map[string]interface{}, 10)
 	请求json["Api"] = "HeartBeat"
 
 	响应json, ok := k.通讯(请求json)
 	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
-		return false
+		return "", false
 	}
 	// {"Time":1683601988,"Status":34623,"Note":""}
 	// {"Time":1683596452,"Status":210,"Note":"未登录,请先操作登录"}
 	// {"Data":{"Status":1},"Time":1684038983,"Status":35387,"Note":""}
 	*响应信息 = string(响应json.GetObject("Data").MarshalTo(nil))
 	*响应当前状态 = 响应json.GetInt("Data", "Status")
-	return true
+	return 响应json.String(), true
 }
 
 /*
