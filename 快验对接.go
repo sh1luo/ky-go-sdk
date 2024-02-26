@@ -28,6 +28,14 @@ type Api快验_类 struct {
 	集_Api网关ApiAppSecret                        []byte
 }
 
+type Response struct {
+	// Data   map[string]interface{} `json:"Data"`
+	Data   interface{} `json:"Data"`
+	Time   int         `json:"Time"`
+	Status int         `json:"Status"`
+	Msg    string      `json:"Msg"`
+}
+
 // 配置json 可以直接在应用设置里复制
 func (k *Api快验_类) C初始化配置(配置json string) bool {
 	局_fastjson, jsonErr := fastjson.Parse(配置json)
@@ -968,6 +976,32 @@ func (k *Api快验_类) Y余额充值_支付宝PC支付(响应信息 *string, �
 	*订单id = string(响应json.GetStringBytes("Data", "OrderId"))
 	*支付Url = string(响应json.GetStringBytes("Data", "PayURL"))
 	return true
+}
+
+func (k *Api快验_类) Y用户云配置_置值(name, value string) bool {
+	请求json := make(map[string]interface{}, 10)
+	请求json["Api"] = "SetUserConfig"
+	请求json["Name"] = name
+	请求json["Value"] = value
+
+	_, ok := k.通讯(请求json)
+	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
+		return false
+	}
+	return true
+}
+
+func (k *Api快验_类) Y用户云配置_取值(name string) (string, bool) {
+	请求json := make(map[string]interface{}, 10)
+	请求json["Api"] = "GetUserConfig"
+	请求json["Name"] = name
+
+	响应json, ok := k.通讯(请求json)
+	if !ok { // 直接返回即可,错误原因 在 发包并返回解密 已经有了
+		return "", false
+	}
+	data := string(响应json.GetObject("Data").MarshalTo(nil))
+	return data, true
 }
 
 /*
